@@ -1,6 +1,6 @@
 {
-  "name": "delegates",
-  "version": "0.1.0",
+  "name": "@fibjs/delegates",
+  "version": "0.1.1",
   "repository": "ngot/fibjs-delegates",
   "description": "delegate methods and accessors to another property",
   "keywords": ["delegate", "delegation", "fibjs"],
