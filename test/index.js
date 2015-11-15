@@ -1,13 +1,14 @@
+var test = require('test');
+var delegate = require('index');
 
-var assert = require('assert');
-var delegate = require('..');
+test.setup();
 
-describe('.method(name)', function(){
-  it('should delegate methods', function(){
+describe('.method(name)', function () {
+  it('should delegate methods', function () {
     var obj = {};
 
     obj.request = {
-      foo: function(bar){
+      foo: function (bar) {
         assert(this == obj.request);
         return bar;
       }
@@ -15,36 +16,36 @@ describe('.method(name)', function(){
 
     delegate(obj, 'request').method('foo');
 
-    obj.foo('something').should.equal('something');
+    assert.equal(obj.foo('something'), 'something');
   })
 })
 
-describe('.getter(name)', function(){
-  it('should delegate getters', function(){
+describe('.getter(name)', function () {
+  it('should delegate getters', function () {
     var obj = {};
 
     obj.request = {
-      get type() {
+      get type () {
         return 'text/html';
       }
     }
 
     delegate(obj, 'request').getter('type');
 
-    obj.type.should.equal('text/html');
+    assert.equal(obj.type, 'text/html');
   })
 })
 
-describe('.setter(name)', function(){
-  it('should delegate setters', function(){
+describe('.setter(name)', function () {
+  it('should delegate setters', function () {
     var obj = {};
 
     obj.request = {
-      get type() {
+      get type () {
         return this._type.toUpperCase();
       },
 
-      set type(val) {
+      set type (val) {
         this._type = val;
       }
     }
@@ -52,20 +53,20 @@ describe('.setter(name)', function(){
     delegate(obj, 'request').setter('type');
 
     obj.type = 'hey';
-    obj.request.type.should.equal('HEY');
+    assert.equal(obj.request.type, 'HEY')
   })
 })
 
-describe('.access(name)', function(){
-  it('should delegate getters and setters', function(){
+describe('.access(name)', function () {
+  it('should delegate getters and setters', function () {
     var obj = {};
 
     obj.request = {
-      get type() {
+      get type () {
         return this._type.toUpperCase();
       },
 
-      set type(val) {
+      set type (val) {
         this._type = val;
       }
     }
@@ -73,7 +74,7 @@ describe('.access(name)', function(){
     delegate(obj, 'request').access('type');
 
     obj.type = 'hey';
-    obj.type.should.equal('HEY');
+    assert.equal(obj.type, 'HEY')
   })
 })
 
@@ -87,8 +88,10 @@ describe('.fluent(name)', function () {
 
     delegate(obj, 'settings').fluent('env');
 
-    obj.env().should.equal('development');
-    obj.env('production').should.equal(obj);
-    obj.settings.env.should.equal('production');
+    assert.equal(obj.env(), 'development')
+    assert.equal(obj.env('production'), obj)
+    assert.equal(obj.settings.env, 'production')
   })
 })
+
+test.run()

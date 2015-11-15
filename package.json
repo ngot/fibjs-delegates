@@ -1,13 +1,8 @@
 {
   "name": "delegates",
   "version": "0.1.0",
-  "repository": "visionmedia/node-delegates",
+  "repository": "ngot/fibjs-delegates",
   "description": "delegate methods and accessors to another property",
-  "keywords": ["delegate", "delegation"],
-  "dependencies": {},
-  "devDependencies": {
-    "mocha": "*",
-    "should": "*"
-  },
+  "keywords": ["delegate", "delegation", "fibjs"],
   "license": "MIT"
 }
